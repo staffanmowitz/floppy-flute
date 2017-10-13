@@ -5,8 +5,8 @@ export default class extends Phaser.State {
     this.load.image('background', './assets/images/background.png')
   }
   create () {
-    this.background = game.add.tileSprite(0, 0, 3000, 600, 'background')
-    let gameHeader = game.add.text(this.game.world.centerX, this.game.world.centerY - 100, 'FLUTE HERO', {align: "center", font: "100px Arial", fill: '#ffffff'})
+    this.background = game.add.sprite(0, 0, 'background')
+    let gameHeader = game.add.text(this.game.world.centerX, this.game.world.centerY - 100, 'Floppy Flute', {align: "center", font: "100px Arial", fill: '#ffffff'})
     gameHeader.anchor.setTo(0.5, 0.5)
     let style = {align: "center", font: "50px Arial", fill: '#ffffff'}
     let menu = []
