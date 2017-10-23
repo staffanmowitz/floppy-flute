@@ -1,4 +1,7 @@
+import {expData} from '../p5/sketch'
+
 export default class extends Phaser.State {
+
   init () {
 
   }
@@ -9,6 +12,7 @@ export default class extends Phaser.State {
 
   }
   create () {
+    console.log(expData());
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     this.background = game.add.tileSprite(0, 0, game.width, game.height, 'background')

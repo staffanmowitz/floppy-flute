@@ -40,10 +40,11 @@ function setup() {
   function portClose() {
     print('The serial port closed.');
   }
-
-
   function draw() {
 		background(0);
   	fill(255);
   	text("sensor value: " + inData, 30, 30);
 	}
+  export const expData = () =>{
+    return inData;
+  }

@@ -2,7 +2,6 @@ require('../styles/main.sass');
 
 import BootState from './states/Boot'
 import SplashState from './states/Splash'
-import Microphone from './states/Microphone'
 import StartMenuState from './states/Start'
 import GameState from './states/Game'
 
