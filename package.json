@@ -14,7 +14,9 @@
     "morgan": "~1.8.1",
     "phaser-ce": "^2.9.1",
     "pug": "~2.0.0-beta11",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "serialport": "^4.0.3",
+    "ws": "^1.1.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

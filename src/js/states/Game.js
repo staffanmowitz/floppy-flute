@@ -1,5 +1,3 @@
-import {expData} from '../p5/sketch'
-
 export default class extends Phaser.State {
 
   init () {
@@ -9,10 +7,8 @@ export default class extends Phaser.State {
     game.load.image('pipe', 'assets/images/pipe.png');
     game.load.image('bird', 'assets/images/bird.png');
     game.load.image('background', 'assets/images/background.png');
-
   }
   create () {
-    console.log(expData());
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     this.background = game.add.tileSprite(0, 0, game.width, game.height, 'background')
@@ -28,8 +24,42 @@ export default class extends Phaser.State {
     this.timer = game.time.events.loop(3000, this.addRowOfPipes, this);
 	  this.spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     this.spaceKey.onDown.add(this.jump, this);
+    this.blowValue = 0
+
   }
   update(){
+  let pressureReturn = returnValue()
+  console.log(pressureReturn);
+  // if (pressureReturn != null) {
+  //   let splitStuff = pressureReturn.split(",")
+  //   if (splitStuff[0] != null && splitStuff[1] != null) {
+  //     let blowValue = splitStuff[0].replace('hej: ', "");
+  //     let btnValue = splitStuff[1].replace('Button: ', "");
+  //     if (btnValue == 1) {
+  //       this.bird.y += 20
+  //     }
+  //     if (btnValue == -1) {
+  //       this.bird.y -= 20
+  //     }
+  //     if (blowValue > 30) {
+  //       console.log("hello");
+  //       this.bird.x += 10
+  //     } else {
+  //       this.bird.x -= 2
+  //     }
+      // if (pressureReturn != null) {
+      //   this.bird.x -= 1
+      //   if(pressureReturn > 50) {
+      //     if (this.bird.x > 300) {
+      //
+      //     } else {
+      //       this.bird.x += 5
+      //     }
+      //     console.log("hej");
+      //   }
+      // }
+      // let pressure = pressureReturn.replace( /^\D+/g, '');
+      // }
     this.score += 1;
     this.labelScore.text = this.score;
     game.physics.arcade.overlap(
@@ -38,6 +68,7 @@ export default class extends Phaser.State {
     this.bird.angle += 1;
   }
   render () {
+    game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
 
   }
   jump() {
