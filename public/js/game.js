@@ -23,7 +23,7 @@ var _Game = __webpack_require__(7);
 
 var _Game2 = _interopRequireDefault(_Game);
 
-var _config = __webpack_require__(9);
+var _config = __webpack_require__(8);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -35,7 +35,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__(10);
+__webpack_require__(9);
 
 var Game = function (_Phaser$Game) {
   _inherits(Game, _Phaser$Game);
@@ -285,27 +285,30 @@ var _class = function (_Phaser$State) {
   }
 
   _createClass(_class, [{
-    key: 'init',
+    key: "init",
     value: function init() {}
   }, {
-    key: 'preload',
+    key: "preload",
     value: function preload() {
-      game.load.image('pipe', 'assets/images/pipe.png');
-      game.load.image('bird', 'assets/images/bird.png');
-      game.load.image('background', 'assets/images/background.png');
+      game.load.image("pipe", "assets/images/pipe.png");
+      game.load.image("bird", "assets/images/angel.gif");
+      game.load.image("background", "assets/images/background.png");
     }
   }, {
-    key: 'create',
+    key: "create",
     value: function create() {
       game.physics.startSystem(Phaser.Physics.ARCADE);
 
-      this.background = game.add.tileSprite(0, 0, game.width, game.height, 'background');
-      this.bird = game.add.sprite(100, 245, 'bird');
+      this.background = game.add.tileSprite(0, 0, game.width, game.height, "background");
+      this.bird = game.add.sprite(100, 245, "bird");
       this.bird.anchor.setTo(-0.2, 0.5);
       this.bird.gravity = 0;
       this.pipes = game.add.group();
       this.score = 0;
-      this.labelScore = game.add.text(20, 20, "0", { font: "30px Arial", fill: "#ffffff" });
+      this.labelScore = game.add.text(20, 20, "0", {
+        font: "30px Arial",
+        fill: "#ffffff"
+      });
 
       game.physics.arcade.enable(this.bird);
 
@@ -315,52 +318,51 @@ var _class = function (_Phaser$State) {
       this.blowValue = 0;
     }
   }, {
-    key: 'update',
+    key: "update",
     value: function update() {
       var pressureReturn = returnValue();
       console.log(pressureReturn);
-      // if (pressureReturn != null) {
-      //   let splitStuff = pressureReturn.split(",")
-      //   if (splitStuff[0] != null && splitStuff[1] != null) {
-      //     let blowValue = splitStuff[0].replace('hej: ', "");
-      //     let btnValue = splitStuff[1].replace('Button: ', "");
-      //     if (btnValue == 1) {
-      //       this.bird.y += 20
-      //     }
-      //     if (btnValue == -1) {
-      //       this.bird.y -= 20
-      //     }
-      //     if (blowValue > 30) {
-      //       console.log("hello");
-      //       this.bird.x += 10
-      //     } else {
-      //       this.bird.x -= 2
-      //     }
-      // if (pressureReturn != null) {
-      //   this.bird.x -= 1
-      //   if(pressureReturn > 50) {
-      //     if (this.bird.x > 300) {
-      //
-      //     } else {
-      //       this.bird.x += 5
-      //     }
-      //     console.log("hej");
-      //   }
-      // }
-      // let pressure = pressureReturn.replace( /^\D+/g, '');
-      // }
-      this.score += 1;
-      this.labelScore.text = this.score;
-      game.physics.arcade.overlap(this.bird, this.pipes, this.hitPipe, null, this);
-      if (this.bird.angle < 20) this.bird.angle += 1;
+      if (pressureReturn != null) {
+        var splitStuff = pressureReturn.split(",");
+        if (splitStuff[0] != null && splitStuff[1] != null) {
+          var blowValue = splitStuff[0].replace("Blow: ", "");
+          var btnValue = splitStuff[1].replace("Button: ", "");
+          if (btnValue == 1) {
+            this.bird.y += 30;
+          }
+          if (btnValue == -1) {
+            this.bird.y -= 30;
+          }
+          if (blowValue > 30) {
+            console.log("hello");
+            this.bird.x += 10;
+          } else {
+            this.bird.x -= 2;
+          }
+          if (pressureReturn != null) {
+            this.bird.x -= 1;
+            if (pressureReturn > 50) {
+              if (this.bird.x > 300) {} else {
+                this.bird.x += 5;
+              }
+              console.log("hej");
+            }
+          }
+          // let pressure = pressureReturn.replace( /^\D+/g, '');
+        }
+        this.score += 1;
+        this.labelScore.text = this.score;
+        game.physics.arcade.overlap(this.bird, this.pipes, this.hitPipe, null, this);
+        if (this.bird.angle < 20) this.bird.angle += 1;
+      }
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
+      game.debug.text(game.time.fps || "--", 2, 14, "#00ff00");
     }
   }, {
-    key: 'jump',
+    key: "jump",
     value: function jump() {
       if (this.bird.alive == false) return;
       var animation = game.add.tween(this.bird);
@@ -369,15 +371,15 @@ var _class = function (_Phaser$State) {
       this.goUp(this.level);
     }
   }, {
-    key: 'restartGame',
+    key: "restartGame",
     value: function restartGame() {
-      game.state.start('Game');
+      game.state.start("Game");
       game.physics.arcade.overlap(this.bird, this.pipes, this.restartGame, null, this);
     }
   }, {
-    key: 'addOnePipe',
+    key: "addOnePipe",
     value: function addOnePipe(x, y) {
-      var pipe = game.add.sprite(x, y, 'pipe');
+      var pipe = game.add.sprite(x, y, "pipe");
       this.pipes.add(pipe);
       game.physics.arcade.enable(pipe);
       pipe.body.velocity.x = -200;
@@ -385,7 +387,7 @@ var _class = function (_Phaser$State) {
       pipe.outOfBoundsKill = true;
     }
   }, {
-    key: 'addRowOfPipes',
+    key: "addRowOfPipes",
     value: function addRowOfPipes() {
       var hole = Math.floor(Math.random() * 5) + 1;
       for (var i = 0; i < 8; i++) {
@@ -393,7 +395,7 @@ var _class = function (_Phaser$State) {
       }
     }
   }, {
-    key: 'hitPipe',
+    key: "hitPipe",
     value: function hitPipe() {
       if (this.bird.alive == false) {
         return;
@@ -406,7 +408,7 @@ var _class = function (_Phaser$State) {
       game.paused = true;
     }
   }, {
-    key: 'goUp',
+    key: "goUp",
     value: function goUp(velocity) {
       if (velocity) {
         this.bird.position.y += velocity;
@@ -421,8 +423,7 @@ var _class = function (_Phaser$State) {
 exports.default = _class;
 
 /***/ }),
-/* 8 */,
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -438,13 +439,13 @@ exports.default = {
 };
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(11);
+var content = __webpack_require__(10);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -452,7 +453,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(13)(content, options);
+var update = __webpack_require__(12)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -469,10 +470,10 @@ if(false) {
 }
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(12)(undefined);
+exports = module.exports = __webpack_require__(11)(undefined);
 // imports
 
 
@@ -483,7 +484,7 @@ exports.push([module.i, "html, body {\n  width: 100%;\n  height: 100%;\n  backgr
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports) {
 
 /*
@@ -565,7 +566,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -621,7 +622,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(14);
+var	fixUrls = __webpack_require__(13);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -937,7 +938,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports) {
 
 
